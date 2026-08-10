@@ -1,89 +1,68 @@
-Architecture & Execution
-Centralized Repository: Validation rules (YAML/README), Python validation scripts, and GitHub Actions workflow files are maintained directly in the Git repository.
-Automated Trigger: A Pull Request containing SQL changes automatically triggers the GitHub Actions workflow.
-Dynamic Validation: The workflow identifies the SQL entity type, such as CREATE, ALTER, DROP, or QUERY, and selects the appropriate validation logic.
-Temporary Execution Environment: GitHub Actions provides a temporary Linux runner to execute the validation without requiring a dedicated server.
-Validation: The Python validator loads the defined rules and validates the changed SQL file.
-Reporting: The validation result is generated as a PASS/FAIL report and displayed within the GitHub Actions/PR workflow.
-Merge Control: If validation fails, the workflow can fail the PR check and prevent the change from being merged until the issues are resolved.
+Approach 4: AI-Powered CI/CD Pipeline via GitHub Copilot CLI
+Context / Description
 
+This approach combines GitHub Actions automation with GitHub Copilot CLI to provide AI-powered SQL validation during the Pull Request process.
+
+The repository contains a single reusable Python orchestration script and the validation rules. When a developer raises a Pull Request containing a .sql file, GitHub Actions automatically starts a temporary Linux runner.
+
+The workflow checks out the repository, identifies the SQL file, loads the validation rules, and invokes GitHub Copilot CLI with a structured validation prompt. Copilot analyzes the SQL against the repository-defined rules and returns the validation result.
+
+There is no local LLM installation or model caching involved. The AI capability is provided through the GitHub Copilot CLI service. The Actions runner acts only as the execution environment for the workflow and CLI.
+
+Key points
+Single Python orchestrator — no separate Python validator for every SQL entity.
+Rules maintained in Git — for example, rules.yaml.
+GitHub Actions provides the temporary Linux execution environment.
+GitHub Copilot CLI provides the AI validation capability.
+No LLM downloaded or cached in the repository or Actions runner.
+Copilot CLI can be invoked programmatically/non-interactively, making it suitable for CI/CD.
+Validation produces a PASS/FAIL result with reasons.
+The result can be surfaced in the Pull Request and used as a CI check.
 
 
 
 Developer
     │
-    │ Commit / Push SQL
+    │ Pull Request / SQL change
     ▼
 GitHub Repository
     │
-    │ Pull Request
+    ├── rules.yaml
+    ├── sql_validator.py
+    ├── changed .sql file
+    └── .github/workflows/validation.yml
+    │
+    │ Workflow Trigger
     ▼
-GitHub Actions
+GitHub Actions Runner
     │
     ├── Checkout Repository
-    │
-    ├── Identify SQL Entity
-    │
+    ├── Load SQL File
     ├── Load Validation Rules
     │
-    ├── Load Python Validator
+    ▼
+GitHub Copilot CLI
     │
-    └── Execute Validation
-             │
-             ▼
-       Validation Result
-          /        \
-       PASS        FAIL
-        │            │
-        ▼            ▼
-   PR Approved    PR Check Failed
-   / Continue     / Fix Issues
-
-
-
-
-repository/
-│
-├── .github/
-│   └── workflows/
-│       └── sql-validation.yml
-│
-├── rules/
-│   └── validation_rules.yaml
-│
-├── python_code/
-│   ├── create.py
-│   ├── alter.py
-│   ├── drop.py
-│   └── query.py
-│
-└── sql/
-    └── customer.sql
-
-
-
-1. Developer creates/updates customer.sql
-             ↓
-2. Developer raises Pull Request
-             ↓
-3. GitHub Actions workflow starts
-             ↓
-4. Repository is checked out
-             ↓
-5. SQL entity type is identified
-             ↓
-6. Corresponding Python validator is selected
-             ↓
-7. Rules + SQL file are loaded
-             ↓
-8. Validation is executed
-             ↓
-9. PASS / FAIL result generated
-             ↓
-10. Result displayed in Pull Request
-             ↓
-       ┌──────────────┐
-       │ PASS → Merge │
-       │ FAIL → Fix   │
-       └──────────────┘
-
+    │ AI Validation Request
+    │
+    │ SQL + Rules + Validation Prompt
+    ▼
+GitHub Copilot AI
+    │
+    │ Validation Response
+    ▼
+GitHub Copilot CLI
+    │
+    ▼
+Validation Result
+    │
+    ├───────────────┐
+    ▼               ▼
+  PASS             FAIL
+    │               │
+    ▼               ▼
+PR Check       PR Check Failed
+Successful      + Issues
+                    │
+                    ▼
+              Developer Fixes
