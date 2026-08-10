@@ -1,0 +1,89 @@
+Architecture & Execution
+Centralized Repository: Validation rules (YAML/README), Python validation scripts, and GitHub Actions workflow files are maintained directly in the Git repository.
+Automated Trigger: A Pull Request containing SQL changes automatically triggers the GitHub Actions workflow.
+Dynamic Validation: The workflow identifies the SQL entity type, such as CREATE, ALTER, DROP, or QUERY, and selects the appropriate validation logic.
+Temporary Execution Environment: GitHub Actions provides a temporary Linux runner to execute the validation without requiring a dedicated server.
+Validation: The Python validator loads the defined rules and validates the changed SQL file.
+Reporting: The validation result is generated as a PASS/FAIL report and displayed within the GitHub Actions/PR workflow.
+Merge Control: If validation fails, the workflow can fail the PR check and prevent the change from being merged until the issues are resolved.
+
+
+
+
+Developer
+    │
+    │ Commit / Push SQL
+    ▼
+GitHub Repository
+    │
+    │ Pull Request
+    ▼
+GitHub Actions
+    │
+    ├── Checkout Repository
+    │
+    ├── Identify SQL Entity
+    │
+    ├── Load Validation Rules
+    │
+    ├── Load Python Validator
+    │
+    └── Execute Validation
+             │
+             ▼
+       Validation Result
+          /        \
+       PASS        FAIL
+        │            │
+        ▼            ▼
+   PR Approved    PR Check Failed
+   / Continue     / Fix Issues
+
+
+
+
+repository/
+│
+├── .github/
+│   └── workflows/
+│       └── sql-validation.yml
+│
+├── rules/
+│   └── validation_rules.yaml
+│
+├── python_code/
+│   ├── create.py
+│   ├── alter.py
+│   ├── drop.py
+│   └── query.py
+│
+└── sql/
+    └── customer.sql
+
+
+
+1. Developer creates/updates customer.sql
+             ↓
+2. Developer raises Pull Request
+             ↓
+3. GitHub Actions workflow starts
+             ↓
+4. Repository is checked out
+             ↓
+5. SQL entity type is identified
+             ↓
+6. Corresponding Python validator is selected
+             ↓
+7. Rules + SQL file are loaded
+             ↓
+8. Validation is executed
+             ↓
+9. PASS / FAIL result generated
+             ↓
+10. Result displayed in Pull Request
+             ↓
+       ┌──────────────┐
+       │ PASS → Merge │
+       │ FAIL → Fix   │
+       └──────────────┘
+

@@ -1,0 +1,185 @@
+<svg viewBox="0 0 1700 1200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+
+  <!-- ===================== BACKGROUND ===================== -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#161b2c"/>
+      <stop offset="100%" stop-color="#0d1120"/>
+    </linearGradient>
+    <marker id="arrowCyan" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2b7fb5"/>
+    </marker>
+    <marker id="arrowDark" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#3a4a5c"/>
+    </marker>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1700" height="1200" fill="url(#bgGrad)"/>
+
+  <!-- ===================== TITLE ===================== -->
+  <text x="55" y="55" font-size="30" font-weight="700" fill="#5fd3ea">Approach 3: Automated CI/CD Pipeline (GitHub Workspaces)</text>
+
+  <text x="55" y="90" font-size="15.5" fill="#dfe3ea">
+    Designed for a zero-server-management infrastructure, this non-AI approach enforces validations
+  </text>
+  <text x="55" y="112" font-size="15.5" fill="#dfe3ea">
+    automatically during the code review process.
+  </text>
+
+  <!-- Bullet 1 -->
+  <circle cx="65" cy="140" r="3" fill="#dfe3ea"/>
+  <text x="80" y="145" font-size="15" fill="#dfe3ea">
+    <tspan font-weight="700" fill="#7fe0f0">Architecture &amp; Execution: </tspan>
+    <tspan fill="#dfe3ea">All validation rules (YAML/README) and entity-specific</tspan>
+  </text>
+  <text x="80" y="166" font-size="15" fill="#dfe3ea">Python scripts are maintained directly in the Git repository. Validation occurs entirely</text>
+  <text x="80" y="187" font-size="15" fill="#dfe3ea">within GitHub Workspaces.</text>
+
+  <!-- Bullet 2 -->
+  <circle cx="65" cy="212" r="3" fill="#dfe3ea"/>
+  <text x="80" y="217" font-size="15" fill="#dfe3ea">
+    <tspan font-weight="700" fill="#7fe0f0">Workflow: </tspan>
+    <tspan fill="#dfe3ea">When a developer opens a Pull Request (PR) containing a .sql file, a GitHub</tspan>
+  </text>
+  <text x="80" y="238" font-size="15" fill="#dfe3ea">Actions workflow is triggered. It spins up a default Linux server, </text>
+  <text x="80" y="259" font-size="15" fill="#dfe3ea"><tspan font-weight="600" fill="#ffd479">ingests the .sql file from the PR</tspan>, pulls the</text>
+  <text x="80" y="280" font-size="15" fill="#dfe3ea">necessary validation files, runs the appropriate script, and outputs the report to the</text>
+  <text x="80" y="301" font-size="15" fill="#dfe3ea">GitHub Workspace command line.</text>
+
+  <text x="55" y="345" font-size="21" font-weight="700" fill="#5fd3ea">Architecture: -</text>
+
+  <!-- ===================== DIAGRAM PANEL ===================== -->
+  <rect x="45" y="370" width="1610" height="790" rx="10" fill="#f4f1e7" stroke="#9aa0a8" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="640" y="358" width="220" height="26" fill="#f4f1e7"/>
+  <text x="750" y="377" font-size="14" font-weight="700" fill="#4a4f57" text-anchor="middle" letter-spacing="1">GITHUB ECOSYSTEM</text>
+
+  <!-- badges -->
+  <rect x="620" y="405" width="200" height="30" rx="15" fill="#dfe5e0" stroke="#8fa88f"/>
+  <text x="720" y="425" font-size="12.5" font-weight="700" fill="#3d5a3d" text-anchor="middle">NO MANAGED SERVERS</text>
+
+  <rect x="835" y="405" width="185" height="30" rx="15" fill="#dfe5e0" stroke="#8fa88f"/>
+  <text x="927" y="425" font-size="12.5" font-weight="700" fill="#3d5a3d" text-anchor="middle">VALIDATION ON PUSH</text>
+
+  <rect x="1035" y="405" width="215" height="30" rx="15" fill="#dfe5e0" stroke="#8fa88f"/>
+  <text x="1142" y="425" font-size="12.5" font-weight="700" fill="#3d5a3d" text-anchor="middle">PYTHON-BASED RULES</text>
+
+  <!-- ===================== USER ===================== -->
+  <rect x="75" y="640" width="150" height="150" rx="8" fill="#ffffff" stroke="#5a6470" stroke-width="1.5" filter="url(#softShadow)"/>
+  <circle cx="150" cy="695" r="24" fill="#7d8791"/>
+  <path d="M115,750 Q150,715 185,750 Z" fill="#7d8791"/>
+  <text x="150" y="778" font-size="13" font-weight="700" fill="#333" text-anchor="middle">USER</text>
+
+  <text x="240" y="625" font-size="12.5" font-weight="700" fill="#3d4a58">1. Commit and</text>
+  <text x="240" y="640" font-size="12.5" font-weight="700" fill="#3d4a58">Push .sql File</text>
+  <path d="M228,712 H320" stroke="#2b7fb5" stroke-width="2" marker-end="url(#arrowCyan)"/>
+
+  <!-- ===================== GITHUB REPOSITORY ===================== -->
+  <rect x="330" y="480" width="320" height="500" rx="8" fill="#ffffff" stroke="#2b7fb5" stroke-width="1.5" filter="url(#softShadow)"/>
+  <rect x="330" y="480" width="320" height="40" rx="8" fill="#2b6ea8"/>
+  <rect x="330" y="500" width="320" height="20" fill="#2b6ea8"/>
+  <circle cx="352" cy="500" r="10" fill="#ffffff"/>
+  <path d="M352,493 a7,7 0 1 0 0.1,0 M348,503 l-3,3 M356,503 l3,3" stroke="#2b6ea8" stroke-width="1.3" fill="none"/>
+  <text x="368" y="506" font-size="14.5" font-weight="700" fill="#ffffff">GITHUB REPOSITORY</text>
+
+  <!-- workflows sub-box -->
+  <rect x="350" y="545" width="280" height="60" rx="6" fill="#eef4fb" stroke="#9db8d0"/>
+  <text x="490" y="568" font-size="13" font-weight="600" fill="#2c3e50" text-anchor="middle">.github/workflows/</text>
+  <text x="490" y="586" font-size="13" fill="#2c3e50" text-anchor="middle">(YAML Workflow)</text>
+
+  <!-- trigger arrow -->
+  <path d="M490,605 V635" stroke="#3a4a5c" stroke-width="1.5" marker-end="url(#arrowDark)"/>
+  <text x="505" y="618" font-size="10.5" fill="#3a4a5c">2. Triggers</text>
+  <text x="505" y="630" font-size="10.5" fill="#3a4a5c">workflow</text>
+
+  <!-- python_code sub-box -->
+  <rect x="350" y="640" width="280" height="65" rx="6" fill="#eef4fb" stroke="#9db8d0"/>
+  <text x="490" y="662" font-size="13" font-weight="600" fill="#2c3e50" text-anchor="middle">python_code/</text>
+  <text x="490" y="680" font-size="12" fill="#2c3e50" text-anchor="middle">(Entity Scripts, e.g.,</text>
+  <text x="490" y="696" font-size="12" fill="#2c3e50" text-anchor="middle">customer.py, order.py)</text>
+
+  <!-- rules sub-box -->
+  <rect x="350" y="720" width="280" height="65" rx="6" fill="#eef4fb" stroke="#9db8d0"/>
+  <text x="490" y="742" font-size="13" font-weight="600" fill="#2c3e50" text-anchor="middle">rules/</text>
+  <text x="490" y="760" font-size="12" fill="#2c3e50" text-anchor="middle">(Validation Rules,</text>
+  <text x="490" y="776" font-size="12" fill="#2c3e50" text-anchor="middle">YAML or README)</text>
+
+  <!-- sql file icon riding into repo -->
+  <g transform="translate(288,665)">
+    <path d="M0,0 H20 L28,8 V32 H0 Z" fill="#ffd479" stroke="#b8860b" stroke-width="1"/>
+    <path d="M20,0 V8 H28 Z" fill="#b8860b"/>
+    <text x="14" y="22" font-size="8.5" font-weight="700" fill="#5a3d00" text-anchor="middle">.sql</text>
+  </g>
+
+  <!-- Arrow: Repository -> Runner -->
+  <path d="M650,720 H730" stroke="#2b7fb5" stroke-width="2" marker-end="url(#arrowCyan)"/>
+  <g transform="translate(655,680)">
+    <path d="M0,0 H16 L22,6 V26 H0 Z" fill="#ffd479" stroke="#b8860b" stroke-width="1"/>
+    <path d="M16,0 V6 H22 Z" fill="#b8860b"/>
+    <text x="11" y="18" font-size="7.5" font-weight="700" fill="#5a3d00" text-anchor="middle">.sql</text>
+  </g>
+
+  <!-- ===================== GITHUB ACTIONS RUNNER ===================== -->
+  <rect x="730" y="480" width="360" height="580" rx="8" fill="#ffffff" stroke="#3f8f6f" stroke-width="1.5" filter="url(#softShadow)"/>
+  <rect x="730" y="480" width="360" height="40" rx="8" fill="#3f8f6f"/>
+  <rect x="730" y="500" width="360" height="20" fill="#3f8f6f"/>
+  <rect x="748" y="492" width="16" height="16" rx="3" fill="#ffffff"/>
+  <text x="785" y="506" font-size="14.5" font-weight="700" fill="#ffffff">GITHUB ACTIONS RUNNER</text>
+
+  <!-- Step 1: NEW explicit .sql intake step, highlighted -->
+  <rect x="748" y="535" width="324" height="46" rx="6" fill="#fff3d6" stroke="#d6a11d" stroke-width="1.6"/>
+  <text x="910" y="563" font-size="13" font-weight="700" fill="#7a5300" text-anchor="middle">1. Receive .sql File from Pull Request</text>
+
+  <!-- Step 2 -->
+  <rect x="748" y="592" width="324" height="34" rx="6" fill="#eaf4ee" stroke="#8fbf9f"/>
+  <text x="910" y="614" font-size="13" fill="#2c3e50" text-anchor="middle">2. Fetch Repository Code</text>
+
+  <!-- Step 3 -->
+  <rect x="748" y="637" width="324" height="34" rx="6" fill="#eaf4ee" stroke="#8fbf9f"/>
+  <text x="910" y="659" font-size="13" fill="#2c3e50" text-anchor="middle">3. Determine Entity</text>
+
+  <!-- Step 4 -->
+  <rect x="748" y="682" width="324" height="34" rx="6" fill="#eaf4ee" stroke="#8fbf9f"/>
+  <text x="910" y="704" font-size="13" fill="#2c3e50" text-anchor="middle">4. Execute Validation</text>
+
+  <!-- sub steps of validation -->
+  <rect x="748" y="728" width="155" height="52" rx="6" fill="#f5f8f3" stroke="#b7cdb9"/>
+  <text x="825" y="750" font-size="11.5" fill="#2c3e50" text-anchor="middle">Load Rules</text>
+  <text x="825" y="765" font-size="11.5" fill="#2c3e50" text-anchor="middle">(YAML/README)</text>
+
+  <rect x="917" y="728" width="155" height="52" rx="6" fill="#f5f8f3" stroke="#b7cdb9"/>
+  <text x="994" y="750" font-size="11.5" fill="#2c3e50" text-anchor="middle">Load Entity</text>
+  <text x="994" y="765" font-size="11.5" fill="#2c3e50" text-anchor="middle">Python Script</text>
+
+  <path d="M910,780 V800" stroke="#7a9c7f" stroke-width="1.3" marker-end="url(#arrowDark)"/>
+
+  <rect x="748" y="800" width="324" height="70" rx="6" fill="#eaf4ee" stroke="#8fbf9f"/>
+  <text x="910" y="822" font-size="12.5" font-weight="600" fill="#2c3e50" text-anchor="middle">Run Python Validation</text>
+  <text x="910" y="840" font-size="11.5" fill="#3d4a58" text-anchor="middle">(e.g., python order.py against</text>
+  <text x="910" y="856" font-size="11.5" fill="#3d4a58" text-anchor="middle">the incoming .sql file)</text>
+
+  <text x="910" y="1040" font-size="12.5" font-style="italic" fill="#4a4f57" text-anchor="middle">A default Linux Server, temporary environment.</text>
+
+  <!-- ===================== GITHUB WORKSPACE ===================== -->
+  <rect x="1130" y="540" width="230" height="150" rx="8" fill="#ffffff" stroke="#1e3a5c" stroke-width="1.5" filter="url(#softShadow)"/>
+  <rect x="1130" y="540" width="230" height="40" rx="8" fill="#1e3a5c"/>
+  <rect x="1130" y="560" width="230" height="20" fill="#1e3a5c"/>
+  <text x="1245" y="565" font-size="20" fill="#7fe0f0" text-anchor="middle">&gt;_</text>
+  <text x="1245" y="605" font-size="12.5" font-weight="700" fill="#2c3e50" text-anchor="middle">GITHUB WORKSPACE</text>
+  <text x="1245" y="622" font-size="11.5" fill="#2c3e50" text-anchor="middle">CMD / WORKFLOW LOGS</text>
+
+  <!-- validation report -->
+  <rect x="1130" y="720" width="230" height="110" rx="8" fill="#f2f2ee" stroke="#9aa0a8" filter="url(#softShadow)"/>
+  <text x="1245" y="752" font-size="13" font-weight="700" fill="#2c3e50" text-anchor="middle">VALIDATION REPORT</text>
+  <text x="1245" y="772" font-size="12" fill="#2c3e50" text-anchor="middle">(Pass/Fail, Errors)</text>
+
+  <!-- Arrow: Runner -> Workspace -->
+  <path d="M1090,615 H1120" stroke="#2b7fb5" stroke-width="2" marker-end="url(#arrowCyan)"/>
+  <circle cx="1105" cy="600" r="10" fill="#2b7fb5"/>
+  <text x="1105" y="604" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">3</text>
+  <text x="910" y="460" font-size="12.5" fill="#3a4a5c" text-anchor="middle">3. Output validation report to GitHub Workspace</text>
+  <path d="M1245,690 V718" stroke="#2b7fb5" stroke-width="2" marker-end="url(#arrowCyan)"/>
+
+</svg>
